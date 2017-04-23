@@ -8,6 +8,13 @@ class Smarthome
       r.redirect '/admin'
     end
 
+    r.post 'device' do
+      r.params.delete '_csrf'
+      Device.create r.params
+
+      r.redirect '/admin'
+    end
+
     r.is do
       r.get do
         @devices = Device.all
