@@ -22,6 +22,14 @@
               input.form-control name="name" type="text" placeholder="eg. TV - Living room" aria-describedby="headphones-icon"
 
           .form-group
+            label.col-md-2.control-label for='ip' IP
+            .input-group.col-md-10
+              span#signal-icon class="input-group-addon"
+                span class="glyphicon glyphicon-signal" aria-hidden="true"
+              input.form-control name="ip" type="text" placeholder="192.168.0.23" aria-describedby="signal-icon"
+
+
+          .form-group
             label.col-md-2.control-label for="device_type_id" Control type
             .input-group.col-md-10
               select.form-control name="device_type_id"
@@ -37,7 +45,7 @@
         ul
           - @devices.each do |d|
             li
-              = "#{d.id} - #{d.name} type #{d.device_type_id}"
+              = "#{d.id} - #{d.ip} - #{d.name} type #{d.device_type_id}"
 
 hr
 
