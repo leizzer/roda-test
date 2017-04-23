@@ -1,3 +1,73 @@
 .row
   .col-md-12
     h1 Admin Dashboard
+
+.row
+  .col-md-12
+    .row
+      .col-md-12
+        h3 Devices
+    .row
+      .col-md-12
+        ul
+          - @devices.each do |d|
+            li
+              = "#{d.id} - #{d.name} type #{d.device_type_id}"
+
+hr
+
+.row
+  .col-md-12
+    .row
+      .col-md-12
+        h3 Device Types
+    .row
+      .col-md-12
+        h4 New device type
+        form.form-horizontal action='/admin/device_types' method='post'
+          == csrf_tag
+
+          .form-group
+            label.col-md-2.control-label for='name' Name
+            .input-group.col-md-10
+              span#bookmark-icon class="input-group-addon"
+                span class="glyphicon glyphicon-bookmark" aria-hidden="true"
+              input.form-control name="name" type="text" placeholder="eg. Chromecast" aria-describedby="bookmark-icon"
+
+          .row
+            .col-md-11.col-md-offset-1
+              h4 Controls
+              .form-group
+                label.col-md-2.control-label for='name' Label
+                .input-group.col-md-10
+                  span#control-icon class="input-group-addon"
+                    span class="glyphicon glyphicon-tasks" aria-hidden="true"
+                  input.form-control name="controls_attributes[][label]" type="text" placeholder="eg. Volume" aria-describedby="control-icon"
+
+              .form-group
+                label.col-md-2.control-label for="controls_attributes[input_type]" Control type
+                .input-group.col-md-10
+                  select.form-control name="controls_attributes[][input_type]"
+                    - Control::TYPES.each do |type|
+                      option value=type
+                        = type.capitalize
+
+              .form-group
+                label.col-md-2.control-label for='name' Options
+                .input-group.col-md-10
+                  span#control-icon class="input-group-addon"
+                    span class="glyphicon glyphicon-tasks" aria-hidden="true"
+                  input.form-control name="controls_attributes[][label]" type="text" placeholder="Rock, Pop, Ultra-Bass" aria-describedby="control-icon"
+                .row
+                  p.col-md-10.col-md-offset-2.help-block For maximum values use a number (eg: 100). For Select inputs list the options separated by comma.
+
+          .input-group
+            input.btn.btn-primary type="submit" value="Save"
+
+    .row
+      .col-md-12
+        ul
+          - @device_types.each do |dt|
+            li
+              = "#{dt.id} - #{dt.name} controls: #{dt.controls.inspect}"
+
