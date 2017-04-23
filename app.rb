@@ -22,6 +22,9 @@ class Smarthome < Roda
   plugin :render, engine: 'slim'
   plugin :multi_route
 
+  plugin :public
+  plugin :static, ['/js', '/css']
+
   Unreloader.require('routes'){}
 
   route do |r|
