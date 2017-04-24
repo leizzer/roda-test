@@ -3,7 +3,7 @@ class Smarthome
 
     r.on 'device_types' do
       r.get do
-        DeviceType.to_json
+        DeviceType.to_json include: :controls
       end
 
       r.post do
