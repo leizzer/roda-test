@@ -1,10 +1,15 @@
 class Device < Sequel::Model
   plugin :nested_attributes
+  plugin :json_serializer
 
-  many_to_one :device_type
+  many_to_one :device_type, eager: :controls
   one_to_many :control_states
 
   nested_attributes :control_states
+
+  def controls
+    device_type.controls
+  end
 
   def before_create
     unless self.device_type.controls.empty?

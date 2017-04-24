@@ -1,4 +1,6 @@
 class Control < Sequel::Model
+  plugin :json_serializer
+
   TYPES= %w{slider button select}.freeze
 
   many_to_one :device_type

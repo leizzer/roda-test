@@ -1,23 +1,46 @@
 class Smarthome
   route 'admin' do |r|
 
-    r.post 'device_types' do
-      r.params.delete '_csrf'
-      DeviceType.create r.params
+    r.on 'device_types' do
+      r.get do
+        DeviceType.to_json
+      end
 
-      r.redirect '/admin'
+      r.post do
+        r.params.delete '_csrf'
+        DeviceType.create r.params
+
+        r.redirect '/admin'
+      end
     end
 
-    r.post 'device' do
-      r.params.delete '_csrf'
-      Device.create r.params
+    r.on 'devices' do
+      r.get do
+        Device.to_json(include: [:controls, :device_type, :control_states])
+      end
+
+      r.post do
+        r.params.delete '_csrf'
+        Device.create r.params
+
+        r.redirect '/admin'
+      end
+
+    end
+
+    r.post 'device', :id do |id|
+      device = Device.find id: id
+
+      if device
+        r.params.delete '_csrf'
+        device.update r.params
+      end
 
       r.redirect '/admin'
     end
 
     r.is do
       r.get do
-        @devices = Device.all
         @device_types = DeviceType.all
         view 'admin/index'
       end

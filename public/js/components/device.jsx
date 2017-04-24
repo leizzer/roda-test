@@ -1,21 +1,33 @@
 class Device extends React.Component {
+
+  _renderControls(){
+    return this.props.dcontrols.map( control => {
+      return (
+        <Control key={control.id} clabel={control.label} ctype={control.input_type} coptions={control.options} />
+      )
+    });
+  }
+
+
   render(){
+    var controls = this._renderControls();
     return (
         <div>
+          <hr />
           <div className="row">
             <div className="col-sm-8">
-              <p>TV</p>
+              <p>{this.props.dname} ({this.props.dtype})</p>
             </div>
+
             <div className="col-sm-4">
-              <p className="pull-right">192.148.9.3</p>
+              <p className="pull-right">{this.props.dip}</p>
             </div>
+
+            {controls}
           </div>
-          <div className="row">
-            <div className="col-sm-12">
-              <label>Volume</label>
-              <input type="text" className="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-value="50" data-slider-step="1" data-slider-selection="after" />
-            </div>
-          </div>
+          <button onClick={() => { this.props.handleEdit(this.props.device) }} type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#deviceModal">
+            Edit
+          </button>
         </div>
         );
   }
