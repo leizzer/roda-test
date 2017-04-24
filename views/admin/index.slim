@@ -6,47 +6,10 @@
 .row
   .col-md-12
     .row
-      .col-md-12
-        h3 Devices
-
-    .row
-      .col-md-12
-        h4 New Device
-        form.form-horizontal action='/admin/device' method='post'
-          == csrf_tag
-
-          .form-group
-            label.col-md-2.control-label for='name' Name
-            .input-group.col-md-10
-              span#headphones-icon class="input-group-addon"
-                span class="glyphicon glyphicon-headphones" aria-hidden="true"
-              input.form-control name="name" type="text" placeholder="eg. TV - Living room" aria-describedby="headphones-icon"
-
-          .form-group
-            label.col-md-2.control-label for='ip' IP
-            .input-group.col-md-10
-              span#signal-icon class="input-group-addon"
-                span class="glyphicon glyphicon-signal" aria-hidden="true"
-              input.form-control name="ip" type="text" placeholder="192.168.0.23" aria-describedby="signal-icon"
-
-
-          .form-group
-            label.col-md-2.control-label for="device_type_id" Control type
-            .input-group.col-md-10
-              select.form-control name="device_type_id"
-                - @device_types.each do |type|
-                  option value=type.id
-                    = type.name
-
-          .input-group
-            input.btn.btn-primary type="submit" value="Save"
-
-    .row
-      .col-md-12
-        ul
-          - @devices.each do |d|
-            li
-              = "#{d.id} - #{d.ip} - #{d.name} type #{d.device_type_id}"
+      #devices-box-component.col-md-12
+        h3
+          | Devices
+          img src="/images/loading.gif" style="height: 1em; width: 1em;"
 
 hr
 

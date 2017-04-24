@@ -23,7 +23,7 @@ class Smarthome < Roda
   plugin :multi_route
 
   plugin :public
-  plugin :static, ['/js', '/css']
+  plugin :static, ['/js', '/css', '/images']
 
   Unreloader.require('routes'){}
 
