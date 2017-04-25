@@ -25,6 +25,17 @@ class Smarthome
       r.redirect '/admin'
     end
 
+    r.post 'device_type/delete', :id do |id|
+      device_type = DeviceType.find id: id
+
+      if device_type
+        device_type.delete
+        device_type.to_json
+      else
+        response.status 404
+      end
+    end
+
     r.on 'devices' do
       r.get do
         Device.to_json(include: [:controls, :device_type, :control_states])
@@ -48,6 +59,18 @@ class Smarthome
       end
 
       r.redirect '/admin'
+    end
+
+    r.post 'device/delete', :id do |id|
+      device = Device.find id: id
+
+      if device
+        device.delete
+        device.to_json
+      else
+        response.status 404
+      end
+
     end
 
     r.is do

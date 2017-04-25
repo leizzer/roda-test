@@ -9,6 +9,10 @@ class DevicesBox extends React.Component {
     this._getDeviceTypes();
   }
 
+  _getCsrfToken(){
+    return $('meta[name="_csrf"]').attr('content');
+  }
+
   _getDevices(){
     jQuery.ajax({
       method: 'GET',
@@ -32,7 +36,7 @@ class DevicesBox extends React.Component {
   _renderDevices(){
     return this.state.devices.map( device => {
       return (
-        <Device key={device.id} dname={device.name} dip={device.ip} dtype={device.device_type.name} dcontrols={device.controls} dstates={device.control_states} device={device} handleEdit={this._handleEditDevice.bind(this)} />
+        <Device key={device.id} dname={device.name} dip={device.ip} dtype={device.device_type.name} dcontrols={device.controls} dstates={device.control_states} device={device} handleEdit={this._handleEditDevice.bind(this)} handleDelete={this._handleDeleteDevice.bind(this)} />
       )
     });
   }
@@ -47,6 +51,22 @@ class DevicesBox extends React.Component {
     this.setState({selectedDevice: device});
   }
 
+  _handleDeleteDevice(device){
+    jQuery.ajax({
+      method: 'POST',
+      url: `/admin/device/delete/${device.id}`,
+      data: {_csrf: this._getCsrfToken()},
+      success: (result) => {
+        var from_state = this.state.devices;
+
+        var devices = $.grep(from_state, function(d){
+          return d.id != device.id;
+        });
+
+        this.setState({devices: devices});
+      }
+    });
+  }
 
   render(){
     var devices = this._renderDevices();

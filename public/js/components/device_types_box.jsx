@@ -10,6 +10,10 @@ class DeviceTypesBox extends React.Component {
     this._getDeviceTypes();
   }
 
+  _getCsrfToken(){
+    return $('meta[name="_csrf"]').attr('content');
+  }
+
   _getDeviceTypes(){
     jQuery.ajax({
       method: 'GET',
@@ -23,7 +27,7 @@ class DeviceTypesBox extends React.Component {
   _renderDeviceTypes(){
     return this.state.device_types.map( dtype => {
       return (
-        <DeviceType key={dtype.id} devicetype={dtype} handleEdit={this._handleEditDeviceType.bind(this)} />
+        <DeviceType key={dtype.id} devicetype={dtype} handleEdit={this._handleEditDeviceType.bind(this)} handleDelete={this._handleDeleteDeviceType.bind(this)} />
       );
     });
   }
@@ -33,6 +37,25 @@ class DeviceTypesBox extends React.Component {
 
     this.setState({selected_devicetype: devicetype});
   }
+
+  _handleDeleteDeviceType(devicetype){
+    jQuery.ajax({
+      method: 'POST',
+      url: `/admin/device_type/delete/${devicetype.id}`,
+      data: {_csrf: this._getCsrfToken()},
+      success: (result) => {
+        var from_state = this.state.device_types;
+
+        var devicetypes = $.grep(from_state, function(d){
+          return d.id != devicetype.id;
+        });
+
+        this.setState({device_types: devicetypes});
+      }
+    });
+  }
+
+
 
 
   render() {

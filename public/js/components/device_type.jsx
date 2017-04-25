@@ -22,6 +22,9 @@ class DeviceType extends React.Component {
               <button onClick={() => { this.props.handleEdit(this.props.devicetype) }} type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target="#typeModal">
                 Edit
               </button>
+              <button onClick={() => { this.props.handleDelete(this.props.devicetype) }} type="button" className="btn btn-danger btn-xs">
+                Delete
+              </button>
 
               {this.props.devicetype.name}
             </h4>

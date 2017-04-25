@@ -47,7 +47,6 @@ class DeviceTypesForm extends React.Component {
     var forms = controls.map(control =>{
       return <ControlForm key={`e${control.id}`} control={control} />
     });
-    console.log(forms);
 
     this.setState({control_forms: forms});
   }
