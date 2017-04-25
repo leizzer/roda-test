@@ -41,48 +41,26 @@ class DeviceTypesBox extends React.Component {
           <div className="row">
             <div className="col-md-12">
               <h3>Device Types</h3>
+
+              <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#typeModal">
+                New Type
+              </button>
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-md-12">
-              <h4>New device type</h4>
-
-              <form action="/admin/device_types" className="form-horizontal" method="post">
-                <input name="_csrf" value="w4R1-M2kZ7RYEDTMvR8k8l8nqOJEitOPgEGAGRXZkIs" type="hidden" />
-
-                <div className="form-group">
-                  <label className="col-md-2 control-label" htmlFor="name">Name</label>
-
-                  <div className="input-group col-md-10">
-                    <span className="input-group-addon" id="bookmark-icon">
-                      <span aria-hidden="true" className="glyphicon glyphicon-bookmark"></span>
-                    </span>
-
-                    <input aria-describedby="bookmark-icon" className="form-control" name="name" placeholder="eg. Chromecast" type="text" />
-                  </div>
+          <div className="device-modal modal fade" id="typeModal" role="dialog" aria-labelledby="typeModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 className="modal-title" id="typeModalLabel">New Device type</h4>
                 </div>
 
-                <div className="row">
-                  <div className="col-md-11 col-md-offset-1">
-                    <h4>
-                      Controls 
-                      <button onClick={this._addControlForm.bind(this)} type="button" className="btn btn-primary btn-sm">
-                        <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                      </button>
-                    </h4>
-
-                    {this.state.control_forms}
-                  </div>
+                <div className="modal-body">
+                  <DeviceTypesForm control_forms={this.state.control_forms} handleAddControl={this._addControlForm.bind(this)} />
                 </div>
-
-
-                <div className="input-group">
-                  <input className="btn btn-primary" value="Save" type="submit" />
-                </div>
-              </form>
+              </div>
             </div>
-
           </div>
 
           {this._renderDeviceTypes()}

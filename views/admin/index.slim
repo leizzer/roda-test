@@ -14,10 +14,3 @@ hr
 .row
   #device-types-box-component.col-md-12
     h3 Device Types
-
-    .row
-      .col-md-12
-        ul
-          - @device_types.each do |dt|
-            li
-              = "#{dt.id} - #{dt.name} controls: #{dt.controls.inspect}"

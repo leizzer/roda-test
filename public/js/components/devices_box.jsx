@@ -57,7 +57,7 @@ class DevicesBox extends React.Component {
             <div className="col-sm-12">
               <h3>Devices</h3>
 
-              <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#deviceModal">
+              <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#deviceModal">
                 New Device
               </button>
             </div>
