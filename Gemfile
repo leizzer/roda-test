@@ -8,6 +8,7 @@ gem 'sequel'
 gem 'sequel_pg'
 gem 'rack-unreloader'
 gem 'rest-client'
+gem 'rake'
 
 gem 'byebug'
 
