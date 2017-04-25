@@ -22,7 +22,6 @@ class SliderType extends React.Component {
 
   render(){
     var max = this.props.coptions || "100";
-    console.log(this.props.cstate);
 
     return (
       <input ref={(input)=> { this.slider = input; }} type="text" className="slider" data-slider-min="0" data-slider-max={max} data-slider-value={this.props.cstate} data-slider-step="1" />
