@@ -37,8 +37,10 @@ class Control extends React.Component {
 
     return (
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-xs-4">
               <label>{this.props.clabel}</label>
+            </div>
+            <div className="col-xs-8">
               {input_type}
             </div>
           </div>

@@ -42,19 +42,19 @@ class Device extends React.Component {
         <div>
           <hr />
           <div className="row">
-            <div className="col-sm-8">
+            <div className="col-xs-8">
               <h4>
                 {this._renderActions()}
                 {this.props.dname} ({this.props.dtype})
               </h4>
             </div>
 
-            <div className="col-sm-4">
+            <div className="col-xs-4">
               <p className="pull-right">{this.props.dip}</p>
             </div>
-
-            {controls}
           </div>
+
+          {controls}
         </div>
         );
   }

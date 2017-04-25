@@ -74,7 +74,7 @@ class DevicesBox extends React.Component {
     return (
         <div>
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-xs-12">
               <h3>Devices</h3>
 
               <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#deviceModal">
@@ -96,11 +96,11 @@ class DevicesBox extends React.Component {
                 </div>
               </div>
             </div>
+          </div>
 
-            <div id="devices-list" className="row">
-              <div className="col-sm-12">
-                {devices}
-              </div>
+          <div id="devices-list" className="row">
+            <div className="col-xs-12">
+              {devices}
             </div>
           </div>
 
