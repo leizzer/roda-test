@@ -5,7 +5,8 @@ class ControlForm extends React.Component {
       control: {},
       label: '',
       input_type: '',
-      options: ''
+      options: '',
+      endpoint: ''
     };
   }
 
@@ -25,6 +26,7 @@ class ControlForm extends React.Component {
       label: control.label,
       input_type: control.input_type,
       options: control.options,
+      endpoint: control.endpoint
     });
 
   }
@@ -47,6 +49,10 @@ class ControlForm extends React.Component {
     this.setState({options: event.target.value})
   }
 
+  _handleChangeEndpoint(event){
+    this.setState({endpoint: event.target.value})
+  }
+
   render(){
     return (
         <div>
@@ -61,6 +67,18 @@ class ControlForm extends React.Component {
               </span>
 
               <input name="controls_attributes[][label]" value={this.state.label} aria-describedby="control-icon" className="form-control" placeholder="eg. Volume" type="text" onChange={this._handleChangeLabel.bind(this)} />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="col-md-2 control-label" htmlFor="name">Endpoint</label>
+
+            <div className="input-group col-md-10">
+              <span className="input-group-addon" id="control-icon">
+                <span aria-hidden="true" className="glyphicon glyphicon-tasks"></span>
+              </span>
+
+              <input name="controls_attributes[][endpoint]" value={this.state.endpoint} aria-describedby="control-icon" className="form-control" placeholder="eg. Volume" type="text" onChange={this._handleChangeEndpoint.bind(this)} />
             </div>
           </div>
 
