@@ -3,15 +3,18 @@ class Control extends React.Component {
   _renderInput(){
     switch (this.props.ctype) {
       case 'slider':
-        return <SliderType />
+        return <SliderType sendChange={this._handleControlChange.bind(this)} />
         break;
       case 'button':
-        return <ButtonType />
+        return <ButtonType sendChange={this._handleControlChange.bind(this)} />
         break;
       case 'select':
-        return <SelectType options={this.props.coptions}/>
+        return <SelectType options={this.props.coptions} sendChange={this._handleControlChange.bind(this)} />
         break;
     }
+  }
+
+  _handleControlChange(){
   }
 
   render(){

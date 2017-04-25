@@ -3,26 +3,6 @@
     .page-header
       h1 Devices
 
-.row
-  .col-sm-12
-    - @devices.each do |d|
-      hr
-      .row
-        .col-sm-8
-          p= d.name
-        .col-sm-4
-          p.pull-right= d.ip
-      - d.control_states.each do |cs|
-        .row
-          .col-sm-12
-            - case cs.control.input_type
-            - when 'slider'
-              label= cs.control.label
-              input.slider.slider-horizontal type="text" class="span2" value="" data-slider-min="0" data-slider-max="100" data-slider-value="50" data-slider-step="1" data-slider-selection="after"
-            - when 'button'
-              a.btn.btn-default=cs.control.label
-            - when 'select'
-              select
-                - cs.control.options.split(',') do |o|
-                  option value=o
-                    = o.capitalize
+#devices-list-component
+
+script type="text/babel" src="/js/components/devices_list.jsx"

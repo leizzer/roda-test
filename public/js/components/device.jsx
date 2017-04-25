@@ -3,9 +3,32 @@ class Device extends React.Component {
   _renderControls(){
     return this.props.dcontrols.map( control => {
       return (
-        <Control key={control.id} clabel={control.label} ctype={control.input_type} coptions={control.options} />
+        <Control key={control.id} cstate={this._controlState(control)} clabel={control.label} ctype={control.input_type} coptions={control.options} />
       )
     });
+  }
+
+  _renderActions(){
+    if (this.props.handleEdit && this.props.handleDelete) {
+      return (
+        <span>
+          <button onClick={() => { this.props.handleEdit(this.props.device) }} type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target="#deviceModal">
+            Edit
+          </button>
+          <button onClick={() => { this.props.handleDelete(this.props.device) }} type="button" className="btn btn-danger btn-xs">
+            Delete
+          </button>
+        </span>
+      )
+    }
+  }
+
+  _controlState(control){
+    var controlstates = $.grep(this.props.device.control_states, function(cs){
+      cs.control_id == control.id
+    });
+
+    return controlstates[0];
   }
 
 
@@ -17,14 +40,7 @@ class Device extends React.Component {
           <div className="row">
             <div className="col-sm-8">
               <h4>
-                <button onClick={() => { this.props.handleEdit(this.props.device) }} type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target="#deviceModal">
-                  Edit
-                </button>
-                <button onClick={() => { this.props.handleDelete(this.props.device) }} type="button" className="btn btn-danger btn-xs">
-                  Delete
-                </button>
-
-
+                {this._renderActions()}
                 {this.props.dname} ({this.props.dtype})
               </h4>
             </div>
