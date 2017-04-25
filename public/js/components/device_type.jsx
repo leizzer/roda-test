@@ -3,7 +3,7 @@ class DeviceType extends React.Component {
   _renderControls(){
     return this.props.devicetype.controls.map( control => {
       return (
-          <div className="row">
+          <div className="row" key={control.id}>
             <div className="col-md-3"> {control.label} </div>
             <div className="col-md-3"> {control.input_type} </div>
             <div className="col-md-3"> {control.options} </div>
@@ -18,7 +18,13 @@ class DeviceType extends React.Component {
           <div className="col-md-12">
             <hr />
 
-            <h5>{this.props.devicetype.name}</h5>
+            <h4>
+              <button onClick={() => { this.props.handleEdit(this.props.devicetype) }} type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target="#typeModal">
+                Edit
+              </button>
+
+              {this.props.devicetype.name}
+            </h4>
 
             {this._renderControls()}
           </div>

@@ -3,12 +3,11 @@ class DeviceTypesBox extends React.Component {
   constructor(){
     super();
 
-    this.state = { device_types: [], control_forms: []};
+    this.state = { device_types: [], selected_devicetype: null};
   }
 
   componentWillMount(){
     this._getDeviceTypes();
-    this._addControlForm();
   }
 
   _getDeviceTypes(){
@@ -21,17 +20,18 @@ class DeviceTypesBox extends React.Component {
     })
   }
 
-  _addControlForm(){
-    var forms = [ <ControlForm key={this.state.control_forms.length} /> ].concat(this.state.control_forms)
-    this.setState({control_forms: forms});
-  }
-
   _renderDeviceTypes(){
     return this.state.device_types.map( dtype => {
       return (
-        <DeviceType key={dtype.id} devicetype={dtype} />
+        <DeviceType key={dtype.id} devicetype={dtype} handleEdit={this._handleEditDeviceType.bind(this)} />
       );
     });
+  }
+
+  _handleEditDeviceType(devicetype){
+    $('#typeModal .modal-header .modal-title').html('Edit Device type');
+
+    this.setState({selected_devicetype: devicetype});
   }
 
 
@@ -57,7 +57,7 @@ class DeviceTypesBox extends React.Component {
                 </div>
 
                 <div className="modal-body">
-                  <DeviceTypesForm control_forms={this.state.control_forms} handleAddControl={this._addControlForm.bind(this)} />
+                  <DeviceTypesForm devicetype={this.state.selected_devicetype} />
                 </div>
               </div>
             </div>

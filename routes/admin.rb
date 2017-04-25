@@ -14,6 +14,17 @@ class Smarthome
       end
     end
 
+    r.post 'device_type', :id do |id|
+      device_type = DeviceType.find id: id
+
+      if device_type
+        r.params.delete '_csrf'
+        device_type.update r.params
+      end
+
+      r.redirect '/admin'
+    end
+
     r.on 'devices' do
       r.get do
         Device.to_json(include: [:controls, :device_type, :control_states])

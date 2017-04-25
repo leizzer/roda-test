@@ -16,7 +16,13 @@ class Device extends React.Component {
           <hr />
           <div className="row">
             <div className="col-sm-8">
-              <p>{this.props.dname} ({this.props.dtype})</p>
+              <h4>
+                <button onClick={() => { this.props.handleEdit(this.props.device) }} type="button" className="btn btn-primary btn-xs" data-toggle="modal" data-target="#deviceModal">
+                  Edit
+                </button>
+
+                {this.props.dname} ({this.props.dtype})
+              </h4>
             </div>
 
             <div className="col-sm-4">
@@ -25,9 +31,6 @@ class Device extends React.Component {
 
             {controls}
           </div>
-          <button onClick={() => { this.props.handleEdit(this.props.device) }} type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#deviceModal">
-            Edit
-          </button>
         </div>
         );
   }
