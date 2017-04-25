@@ -1,9 +1,12 @@
 class Device < Sequel::Model
+  plugin :association_dependencies
   plugin :nested_attributes
   plugin :json_serializer
 
   many_to_one :device_type, eager: :controls
   one_to_many :control_states
+
+  add_association_dependencies control_states: :destroy
 
   nested_attributes :control_states
 
