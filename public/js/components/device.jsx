@@ -3,7 +3,7 @@ class Device extends React.Component {
   _renderControls(){
     return this.props.dcontrols.map( control => {
       return (
-        <Control key={control.id} cstate={this._controlState(control)} clabel={control.label} ctype={control.input_type} coptions={control.options} />
+        <Control key={control.id} cid={control.id} cstate={this._controlState(control)} clabel={control.label} ctype={control.input_type} coptions={control.options} />
       )
     });
   }
@@ -25,10 +25,14 @@ class Device extends React.Component {
 
   _controlState(control){
     var controlstates = $.grep(this.props.device.control_states, function(cs){
-      cs.control_id == control.id
+      return cs.control_id == control.id;
     });
 
-    return controlstates[0];
+    if (controlstates[0]) {
+      return controlstates[0].value;
+    }else{
+      return '';
+    }
   }
 
 
